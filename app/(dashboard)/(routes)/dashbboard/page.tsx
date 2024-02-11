@@ -31,24 +31,24 @@ interface skillCardData {
   note: string;
 }
 
-export const carrerformSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required",
-  }),
-});
+// export const carrerformSchema = z.object({
+//   title: z.string().min(1, {
+//     message: "Title is required",
+//   }),
+// });
 
 export default function CreatePage() {
   const [blog, setBlog] = React.useState<any>([]);
   const router = useRouter();
-  const form = useForm<z.infer<typeof carrerformSchema>>({
-    resolver: zodResolver(carrerformSchema),
-    defaultValues: {
-      title: "",
-    },
-  });
+  // const form = useForm<z.infer<typeof carrerformSchema>>({
+  //   resolver: zodResolver(carrerformSchema),
+  //   defaultValues: {
+  //     title: "",
+  //   },
+  // });
   console.log("🚀 ~ handleSubmit ~ values:");
 
-  const { isSubmitting, isValid } = form.formState;
+  // const { isSubmitting, isValid } = form.formState;
 
   //ADD MUTATION THAT RECEIVES THE FORM DATA
 
@@ -69,12 +69,12 @@ export default function CreatePage() {
   //   },
   // });
 
-  const handleSubmit = async (values: z.infer<typeof carrerformSchema>) => {
-    // mutation.mutate(values);
-    const data = await handleBlogSubmit(values);
-
-    setBlog(data);
-  };
+  //   const handleSubmit = async (values: z.infer<typeof carrerformSchema>) => {
+  //     // mutation.mutate(values);
+  //     // const data = await handleBlogSubmit(values);
+  // console.log("🚀 ~ handleSubmit ~ values", values);
+  //     // setBlog(data);
+  //   };
   // console.log("🚀 ~ handleSubmit ~ mutation", mutation);
 
   return (
@@ -82,7 +82,7 @@ export default function CreatePage() {
       <div className="gap-4 flex flex-col">
         <h1 className="text-2xl">SuperCharge your career</h1>
         <p>Advance your career with personalized learning paths.</p>
-        <Form {...form}>
+        {/* <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
             className="mt-4 space-y-4"
@@ -118,7 +118,7 @@ export default function CreatePage() {
               </Button>
             </div>
           </form>
-        </Form>
+        </Form> */}
 
         {/* {mutation.data &&
           mutation.data.map((item: skillCardData, index: number) => (
