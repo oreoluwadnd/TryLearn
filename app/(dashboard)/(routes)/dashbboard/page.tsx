@@ -20,10 +20,10 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { toast } from "sonner";
 import { SparklesIcon } from "lucide-react";
-import { handleCarrerSubmit } from "@/actions/getSkills";
+// import { handleCarrerSubmit } from "@/actions/getSkills";
 import { SkillsCard } from "./_components/skills";
 import { get } from "http";
-import { handleBlogSubmit } from "@/actions/getBlogs";
+// import { handleBlogSubmit } from "@/actions/getBlogs";
 import { BlogCard } from "./_components/blogs";
 
 interface skillCardData {
