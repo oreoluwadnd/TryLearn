@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { PenToolIcon, Rabbit } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 export default function Navbar() {
@@ -10,9 +11,9 @@ export default function Navbar() {
           <h1 className="text-2xl font-bold text-[#E63E21]">Try</h1>
           <h1 className="text-2xl font-bold">Learn</h1>
         </div>
-        <div>
+        <Link href={"/signup"} shallow={true}>
           <Button>Log In</Button>
-        </div>
+        </Link>
       </div>
     </nav>
   );

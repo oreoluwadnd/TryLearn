@@ -1,23 +1,16 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  BarChartIcon,
-  Bot,
-  Compass,
-  File,
-  LucideBookmarkCheck,
-  LucideIcon,
-  SearchCheck,
-  StarIcon,
-} from "lucide-react";
-import React from "react";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
+import { Bot, LucideIcon, SearchCheck, StarIcon } from "lucide-react";
 
 interface FeaturesProps {
   logo: LucideIcon;
@@ -31,6 +24,24 @@ const features: FeaturesProps[] = [
     logo: SearchCheck,
     description:
       "Input skills and goals for personalized development recommendations..",
+  },
+  {
+    title: "AI Course Recommendations",
+    logo: Bot,
+    description:
+      "AI suggests tailored courses based on skill gaps and career goals.",
+  },
+  {
+    title: "AI Course Recommendations",
+    logo: Bot,
+    description:
+      "AI suggests tailored courses based on skill gaps and career goals.",
+  },
+  {
+    title: "AI Course Recommendations",
+    logo: Bot,
+    description:
+      "AI suggests tailored courses based on skill gaps and career goals.",
   },
   {
     title: "AI Course Recommendations",
@@ -53,36 +64,55 @@ export default function Testimonial() {
                 Unlock Your Potential: Hear What Users Are Saying at TryLearn
               </p>
             </div>
-            <div className="w-full max-w-full space-y-4 mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <Carousel
+              className=""
+              opts={{
+                loop: true,
+                dragFree: true,
+                slidesToScroll: 1,
+                containScroll: "trimSnaps",
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 2000,
+                }),
+              ]}
+            >
+              <CarouselContent>
                 {features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center p-4 border border-gray-200 rounded-lg"
-                  >
-                    <blockquote className="text-center">
-                      The Career Growth Roadmap has been a godsend! It&apos;s
-                      simplified my career trajectory in AI, giving me a clear
-                      path forward. Highly recommended!&quot;
-                    </blockquote>
-                    <div className="mt-4 flex">
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
+                  <CarouselItem key={index} className="basis-1/3">
+                    <div className="flex flex-col items-center p-4 border border-gray-200 rounded-lg">
+                      <blockquote className="text-center">
+                        <p className="text-lg font-semibold">{feature.title}</p>
+                      </blockquote>
+                      <div className="mt-4 flex">
+                        <StarIcon className="text-yellow-400" />
+                        <StarIcon className="text-yellow-400" />
+                        <StarIcon className="text-yellow-400" />
+                        <StarIcon className="text-yellow-400" />
+                        <StarIcon className="text-yellow-400" />
+                      </div>
+                      <p className="mt-2 font-semibold">Alex T.</p>
+                      <Avatar>
+                        <AvatarImage
+                          alt="Damon Chen"
+                          src="/placeholder.svg?height=64&width=64"
+                        />
+                      </Avatar>
                     </div>
-                    <p className="mt-2 font-semibold">Alex T.</p>
-                    <Avatar>
-                      <AvatarImage
-                        alt="Damon Chen"
-                        src="/placeholder.svg?height=64&width=64"
-                      />
-                    </Avatar>
-                  </div>
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <span className="text-3xl font-semibold">
+                          {index + 1}
+                        </span>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
                 ))}
-              </div>
-            </div>
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </div>
       </div>
