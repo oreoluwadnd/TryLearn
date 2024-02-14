@@ -78,9 +78,36 @@ export default function CreatePage() {
   // console.log("🚀 ~ handleSubmit ~ mutation", mutation);
 
   return (
-    <div className="max-w-5xl mx-auto flex-col gap-3 flex md:items-center md:justify-center h-full p-6">
+    <div className="max-w-5xl overflow-y-scroll rounded-t-3xl bg-pink-200 mx-auto flex-col gap-3 flex md:items-center md:justify-center h-full p-6">
       <div className="gap-4 flex flex-col">
-        <h1 className="text-2xl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <h1 className="text-9xlxl">SuperCharge your career</h1>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
+        <p>Advance your career with personalized learning paths.</p>
         <p>Advance your career with personalized learning paths.</p>
         {/* <Form {...form}>
           <form
