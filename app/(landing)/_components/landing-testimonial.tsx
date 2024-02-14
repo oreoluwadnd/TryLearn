@@ -21,8 +21,17 @@ interface TestimoniallProps {
 
 const testimonial: TestimoniallProps[] = [
   {
-    name: "Charles",
-    rating: 4,
+    name: "Masu'd",
+    rating: 5,
+    image:
+      "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
+    description: `"The Career Growth Roadmap has been a godsend! It's
+                        simplified my career trajectory in AI, giving me a clear
+                        path forward. Highly recommended"`,
+  },
+  {
+    name: "James",
+    rating: 5,
     image:
       "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
     description: `"The Career Growth Roadmap has been a godsend! It's
@@ -31,25 +40,16 @@ const testimonial: TestimoniallProps[] = [
   },
   {
     name: "Charles",
-    rating: 4,
     image:
       "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
+    rating: 5,
     description: `"The Career Growth Roadmap has been a godsend! It's
                         simplified my career trajectory in AI, giving me a clear
                         path forward. Highly recommended"`,
   },
   {
-    name: "Charles",
-    image:
-      "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
-    rating: 4,
-    description: `"The Career Growth Roadmap has been a godsend! It's
-                        simplified my career trajectory in AI, giving me a clear
-                        path forward. Highly recommended"`,
-  },
-  {
-    name: "Charles",
-    rating: 4,
+    name: "Alex",
+    rating: 5,
     image:
       "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
     description: `"The Career Growth Roadmap has been a godsend! It's
@@ -74,17 +74,14 @@ export default function Testimonial() {
             className=""
             opts={{
               loop: true,
-              dragFree: true,
-              slidesToScroll: 1,
-              containScroll: "trimSnaps",
             }}
             plugins={[
               Autoplay({
-                delay: 2000,
+                delay: 3000,
               }),
             ]}
           >
-            <CarouselContent>
+            <CarouselContent className="w-full">
               {testimonial.map((testimonial, index) => (
                 <CarouselItem
                   key={index}
@@ -95,11 +92,7 @@ export default function Testimonial() {
                       {testimonial.description}
                     </blockquote>
                     <div className="mt-4 flex">
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
-                      <StarIcon className="text-yellow-400" />
+                      {renderStars(testimonial.rating)}
                     </div>
                     <p className="mt-2 font-semibold">{testimonial.name}</p>
                     <Avatar>
@@ -109,7 +102,7 @@ export default function Testimonial() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
+            <CarouselPrevious className="mr-8" />
             <CarouselNext />
           </Carousel>
         </div>
@@ -117,3 +110,15 @@ export default function Testimonial() {
     </section>
   );
 }
+
+const renderStars = (rating: number) => {
+  const maxStars = 5; // Maximum number of stars
+  const filledStars = Math.min(Math.max(0, rating), maxStars); // Ensure rating is between 0 and maxStars
+
+  return [...Array(maxStars)].map((_, index) => (
+    <StarIcon
+      key={index}
+      className={index < filledStars ? "text-yellow-400" : "text-gray-400"}
+    />
+  ));
+};
