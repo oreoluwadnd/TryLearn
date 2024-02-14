@@ -22,7 +22,7 @@ function Login() {
 
   return (
     <>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="sm:mx-auto  sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Welcome to <span className="text-[#E63E21]">Try</span>Learn
         </h2>
@@ -33,8 +33,8 @@ function Login() {
           </Link>
         </div>
       </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="mt-8 mx-auto w-full max-w-md">
+        <div className="bg-white  py-8 px-4 shadow rounded-lg sm:px-10">
           <form action="#" className="space-y-6" method="POST">
             <div>
               <label className="sr-only" htmlFor="email">

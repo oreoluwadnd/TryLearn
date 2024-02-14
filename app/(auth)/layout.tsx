@@ -8,7 +8,7 @@ interface Props {
 
 export default function AuthLayout({ children }: Props) {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center">
+    <div className="min-h-screen px-3  flex flex-col justify-center">
       <Link href="/" className="">
         <EggFriedIcon className="h-12 mx-auto w-auto" />
       </Link>
