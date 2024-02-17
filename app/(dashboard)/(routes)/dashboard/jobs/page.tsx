@@ -21,10 +21,6 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { SparklesIcon } from "lucide-react";
 // import { handleCarrerSubmit } from "@/actions/getSkills";
-import { SkillsCard } from "./_components/skills";
-import { get } from "http";
-// import { handleBlogSubmit } from "@/actions/getBlogs";
-import { BlogCard } from "./_components/blogs";
 
 interface skillCardData {
   name: string;
@@ -152,11 +148,6 @@ export default function CreatePage() {
           mutation.data.map((item: skillCardData, index: number) => (
             <SkillsCard key={index} item={item} />
           ))} */}
-
-          {blog &&
-            blog?.map((item: any, index: number) => (
-              <BlogCard key={index} item={item} />
-            ))}
         </div>
       </div>
     </div>
