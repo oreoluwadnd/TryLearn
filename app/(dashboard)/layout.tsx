@@ -13,7 +13,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
       <div className="hidden md:flex z-50 h-full w-56 fixed inset-y-0">
         <Sidebar />
       </div>
-      <main className="md:pl-56 overflow-scroll w-full h-full">{children}</main>
+      <main className="md:pl-56  overflow-scroll w-full h-full">
+        {children}
+      </main>
     </div>
   );
 }

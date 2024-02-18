@@ -5,10 +5,28 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { toast } from "sonner";
+import { ChevronRightIcon } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Progress } from "@/components/ui/progress";
 // import { handleCarrerSubmit } from "@/actions/getSkills";
@@ -70,12 +88,6 @@ export default function CreatePage() {
         <main className="grid items-start gap-4 p-4 md:gap-8 md:p-6">
           <div className="flex justify-between items-center gap-2">
             <h1 className="font-semibold text-2xl">Courses</h1>
-            <Link
-              className="ml-auto whitespace-nowrap mt-auto justify-center flex w-fit md:w-fit h-10 items-center rounded-lg border  border-gray-200 bg-[#F1FAFF] px-8  text-sm font-medium text-black shadow transition-colors hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#F1FAFF]"
-              href="/dashboard/learning/new"
-            >
-              New Course
-            </Link>
           </div>
           <div className="grid gap-4">
             <div className="flex flex-col md:flex-row items-start gap-4 border p-3 rounded-md bg-white">
