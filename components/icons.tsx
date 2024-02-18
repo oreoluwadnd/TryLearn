@@ -6,6 +6,7 @@ import {
   TbPencil,
   TbGift,
 } from "react-icons/tb";
+import { IoChevronBack } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { PiFireFill } from "react-icons/pi";
 import { FcLineChart } from "react-icons/fc";
@@ -21,5 +22,6 @@ const Icons = {
   Menu: HiMenuAlt1,
   Chart: FcLineChart,
   Fire: PiFireFill,
+  ChevronBack: IoChevronBack,
 };
 export default Icons;
