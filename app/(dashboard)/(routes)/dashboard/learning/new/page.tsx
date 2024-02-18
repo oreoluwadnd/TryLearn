@@ -1,7 +1,6 @@
 "use client";
 
 import * as z from "zod";
-import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -13,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -26,7 +24,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { handleCarrerSubmit } from "@/actions/getSkills";
 import { clsx } from "clsx";
 import Icons from "@/components/icons";
 
@@ -40,27 +37,19 @@ const formSchema = z.object({
   duration: z.string().min(1, {
     message: "Duration is required",
   }),
-  mode: z.string().min(1, {
+  tutor: z.string().min(1, {
     message: "Mode is required",
   }),
 });
 
-// export const carrerformSchema = z.object({
-//   title: z.string().min(1, {
-//     message: "Title is required",
-//   }),
-// });
-
 export default function CreatePage() {
-  const [blog, setBlog] = useState<any>([]);
-  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       topic: "",
       level: "",
       duration: "",
-      mode: "",
+      tutor: "",
     },
   });
 
@@ -156,7 +145,7 @@ export default function CreatePage() {
                   />
                   <FormField
                     control={form.control}
-                    name="level"
+                    name="tutor"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Mode</FormLabel>
@@ -166,11 +155,16 @@ export default function CreatePage() {
                         >
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Select a mode" />
+                              <SelectValue placeholder="Select a Tutor" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="m@example.com">Video</SelectItem>
+                            <SelectItem value="Emily">Emily</SelectItem>
+                            <SelectItem value="Raj">Raj</SelectItem>
+                            <SelectItem value="Maria">Maria</SelectItem>
+                            <SelectItem value="Liam">Liam</SelectItem>
+                            <SelectItem value="Haruto">Haruto</SelectItem>
+                            <SelectItem value="Pedro">Pedro</SelectItem>
                           </SelectContent>
                         </Select>
 

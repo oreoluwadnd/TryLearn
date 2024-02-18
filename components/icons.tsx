@@ -10,6 +10,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { PiFireFill } from "react-icons/pi";
 import { FcLineChart } from "react-icons/fc";
+import { FcAcceptDatabase } from "react-icons/fc";
 
 export type IconsType = keyof typeof Icons;
 const Icons = {
@@ -23,5 +24,6 @@ const Icons = {
   Chart: FcLineChart,
   Fire: PiFireFill,
   ChevronBack: IoChevronBack,
+  Database: FcAcceptDatabase,
 };
 export default Icons;

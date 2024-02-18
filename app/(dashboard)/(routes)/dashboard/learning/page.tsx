@@ -149,7 +149,7 @@ export default function CreatePage() {
               </div>
               <Link
                 className="ml-auto whitespace-nowrap mt-auto justify-center flex w-full md:w-fit h-10 items-center rounded-lg border  border-gray-200 bg-gray-950 px-8  text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-950/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950"
-                href="#"
+                href="/dashboard/learning/1"
               >
                 Enroll
               </Link>
