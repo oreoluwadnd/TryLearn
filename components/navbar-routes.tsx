@@ -43,7 +43,7 @@ export const NavbarRoutes = () => {
         <div className="flex space-x-3">
           <Link
             href="/search"
-            className="border-2 p-1 font-light rounded-lg text-lg border-red-300 space-x-0 flex items-center "
+            className="p-1 font-light rounded-lg text-lg space-x-0 flex items-center "
           >
             <Icons.Fire className="text-red-400" />
             <span>60</span>

@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 function Sidebar() {
   return (
-    <div className="h-full w-full  flex flex-col overflow-y-auto shadow-sm bg-white ">
+    <div className="h-full w-full  py-3 flex flex-col overflow-y-auto shadow-sm bg-white ">
       <div className="flex items-center h-20  pl-7 text-black">
         <Icons.Chart className="h-6 w-6 " />
         <h1 className="ml-2 text-lg font-semibold">CareerHub</h1>

@@ -49,7 +49,7 @@ export default function CourseDetails() {
                 <div className="mt-auto pt-5">
                   <Link
                     className="whitespace-nowrap   justify-center flex w-full md:w-fit h-10 items-center rounded-lg border  border-gray-200 bg-gray-950 px-8  text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-950/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950"
-                    href="/dashboard/learning/1"
+                    href="/course/1/chapter/1"
                   >
                     Enroll
                   </Link>
@@ -83,13 +83,13 @@ export default function CourseDetails() {
                   Learning about hooks and how to use them
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-1">
+              <AccordionItem value="item-4">
                 <AccordionTrigger>4. React Context and Redux</AccordionTrigger>
                 <AccordionContent>
                   Managing state with Context and Redux
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-2">
+              <AccordionItem value="item-5">
                 <AccordionTrigger>
                   5. React Router and Navigation
                 </AccordionTrigger>
@@ -97,7 +97,7 @@ export default function CourseDetails() {
                   Understanding how to navigate between pages
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-3">
+              <AccordionItem value="item-6">
                 <AccordionTrigger>
                   6. React Testing and Debugging
                 </AccordionTrigger>

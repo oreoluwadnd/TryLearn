@@ -11,6 +11,7 @@ import { HiMenuAlt1 } from "react-icons/hi";
 import { PiFireFill } from "react-icons/pi";
 import { FcLineChart } from "react-icons/fc";
 import { FcAcceptDatabase } from "react-icons/fc";
+import { PiPlayCircleBold, PiPauseCircleBold } from "react-icons/pi";
 
 export type IconsType = keyof typeof Icons;
 const Icons = {
@@ -25,5 +26,7 @@ const Icons = {
   Fire: PiFireFill,
   ChevronBack: IoChevronBack,
   Database: FcAcceptDatabase,
+  Play: PiPlayCircleBold,
+  Pause: PiPauseCircleBold,
 };
 export default Icons;
