@@ -24,12 +24,12 @@ export function SideBarItem({
   useEffect(() => {
     setMounted(true);
   }, []);
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const router = useRouter();
-  const isActive =
-    (pathname === "/" && href === "/") ||
-    pathname === href ||
-    pathname?.startsWith(`${href}/`);
+  // const isActive =
+  //   (pathname === "/" && href === "/") ||
+  //   pathname === href ||
+  //   pathname?.startsWith(`${href}/`);
 
   const onClick = () => {
     router.push(href);
@@ -43,9 +43,7 @@ export function SideBarItem({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center rounded-xl gap-x-2 text-black text-sm font-[500] pl-6 transition-all hover:bg-[#F8F4F2]",
-        isActive &&
-          "text-sky-700 bg-sky-200/20 hover:bg-sky-200/20 hover:text-sky-700"
+        "flex items-center rounded-xl gap-x-2 text-black text-sm font-[500] pl-6 transition-all hover:bg-[#F8F4F2]"
       )}
     >
       <TooltipProvider>
@@ -54,7 +52,7 @@ export function SideBarItem({
             <Icon
               className={cn(
                 "text-black text-xl flex-shrink-0",
-                isActive && "text-sky-700"
+                true && "text-sky-700"
               )}
             />
             <p className="text-ellipsis truncate whitespace-nowrap overflow-hidden">
