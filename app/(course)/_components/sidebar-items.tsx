@@ -1,4 +1,5 @@
 "use client ";
+import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
@@ -40,30 +41,33 @@ export function SideBarItem({
   }
 
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "flex items-center rounded-xl gap-x-2 text-black text-sm font-[500] pl-6 transition-all hover:bg-[#F8F4F2]"
-      )}
-    >
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger className="flex items-center gap-2 py-4 w-full">
-            <Icon
-              className={cn(
-                "text-black text-xl flex-shrink-0",
-                true && "text-sky-700"
-              )}
-            />
-            <p className="text-ellipsis truncate whitespace-nowrap overflow-hidden">
-              {name}
-            </p>
-          </TooltipTrigger>
-          <TooltipContent side="right" suppressHydrationWarning={true}>
-            <p className="text-xs text-gray-500">{name}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </button>
+    <>
+      <button
+        onClick={onClick}
+        className={cn(
+          "flex items-center rounded-xl gap-x-2 text-black text-sm font-[500] pl-6 transition-all hover:bg-[#F8F4F2]"
+        )}
+      >
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="flex items-center gap-2 py-4 w-full">
+              <Icon
+                className={cn(
+                  "text-black text-xl flex-shrink-0",
+                  true && "text-sky-700"
+                )}
+              />
+              <p className="text-ellipsis truncate whitespace-nowrap overflow-hidden">
+                {name}
+              </p>
+            </TooltipTrigger>
+            <TooltipContent side="right" suppressHydrationWarning={true}>
+              <p className="text-xs text-gray-500">{name}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </button>
+      <Separator />
+    </>
   );
 }

@@ -29,6 +29,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export const NavbarRoutes = () => {
   const pathname = usePathname();
@@ -41,18 +47,22 @@ export const NavbarRoutes = () => {
     <>
       <div className="flex  ml-auto gap-x-2">
         <div className="flex space-x-3">
-          <Link
-            href="/search"
-            className="p-1 font-light rounded-lg text-lg space-x-0 flex items-center "
-          >
-            <Icons.Fire className="text-red-400" />
-            <span>60</span>
-          </Link>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger className="p-1 font-light rounded-lg text-lg space-x-0 flex items-center ">
+                <p className="text-red-400 text-2xl animate-pulse">🔥</p>
+                <span className="">25</span>
+              </TooltipTrigger>
+              <TooltipContent suppressHydrationWarning={true}>
+                <p className="text-xs text-gray-500">Good Job.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="cursor-pointer">
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src="https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png"
                   alt="@shadcn"
                   className="w-10 h-10"
                 />

@@ -30,7 +30,7 @@ function Sidebar() {
           </CardHeader>
           <CardContent>
             <Button className="w-full" size="sm">
-              Upgrade
+              Upgrade⚡
             </Button>
           </CardContent>
         </Card>
