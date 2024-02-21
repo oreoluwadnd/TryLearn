@@ -1,154 +1,83 @@
 "use client";
-import React from "react";
-import * as z from "zod";
-import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
-import { toast } from "sonner";
-import { SparklesIcon } from "lucide-react";
-// import { handleCarrerSubmit } from "@/actions/getSkills";
-
-interface skillCardData {
-  name: string;
-  note: string;
-}
-
-// export const carrerformSchema = z.object({
-//   title: z.string().min(1, {
-//     message: "Title is required",
-//   }),
-// });
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import {
+  CodeIcon,
+  DatabaseIcon,
+  Package2Icon,
+  SwitchCamera,
+  UsersIcon,
+} from "lucide-react";
 
 export default function CreatePage() {
-  const [blog, setBlog] = React.useState<any>([]);
-  const router = useRouter();
-  // const form = useForm<z.infer<typeof carrerformSchema>>({
-  //   resolver: zodResolver(carrerformSchema),
-  //   defaultValues: {
-  //     title: "",
-  //   },
-  // });
-  console.log("🚀 ~ handleSubmit ~ values:");
-
-  // const { isSubmitting, isValid } = form.formState;
-
-  //ADD MUTATION THAT RECEIVES THE FORM DATA
-
-  // const mutation = useMutation({
-  //   mutationFn: handleCarrerSubmit,
-  //   onSuccess: (data, variables, context) => {
-  //     console.log("🚀 ~ onSuccess ~ data", data);
-  //     toast.success("Skills Ready! 🎉", {
-  //       icon: <SparklesIcon />,
-  //       description: "Your skills are ready to be used!",
-  //     });
-  //   },
-  //   onError: (error, variables, context) => {
-  //     console.log("🚀 ~ onError ~ error", error);
-  //     toast.error("Error", {
-  //       description: "There was an error creating your course.",
-  //     });
-  //   },
-  // });
-
-  //   const handleSubmit = async (values: z.infer<typeof carrerformSchema>) => {
-  //     // mutation.mutate(values);
-  //     // const data = await handleBlogSubmit(values);
-  // console.log("🚀 ~ handleSubmit ~ values", values);
-  //     // setBlog(data);
-  //   };
-  // console.log("🚀 ~ handleSubmit ~ mutation", mutation);
-
   return (
-    <div className="h-full overflow-hidden">
-      <div className=" overflow-y-scroll bg-[#FAFBFB] mx-auto flex-col gap-3 flex md:items-center md:justify-center h-full py-9">
-        <div className="gap-4 flex flex-col">
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          {/* <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="mt-4 space-y-4"
-          >
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Career Path</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g Software Engineer, Data Scientist, etc."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Identify the skills you need to advance your career.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center gap-x-2">
-              <Link href="/">
-                <Button type="button" variant="ghost">
-                  Cancel
-                </Button>
-              </Link>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
-                Continue
-              </Button>
-            </div>
-          </form>
-        </Form> */}
-
-          {/* {mutation.data &&
-          mutation.data.map((item: skillCardData, index: number) => (
-            <SkillsCard key={index} item={item} />
-          ))} */}
-        </div>
+    <div className="overflow-hidden">
+      <div className=" overflow-y-scroll bg-[#FAFBFB] mx-auto flex-col gap-3 flex  h-full pb-24">
+        <main className="grid items-start gap-4 p-4 md:gap-8 md:p-6">
+          <div className="flex items-center gap-4">
+            <h1 className="font-semibold text-2xl md:text-3xl">My Roadmap</h1>
+            <Button className="ml-auto" size="sm">
+              Personalize
+            </Button>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <div className="flex flex-row items-center space-y-0">
+                  <CodeIcon className="h-6 w-6" />
+                  <CardTitle className="ml-2">Frontend Developer</CardTitle>
+                </div>
+                <Switch />
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-2 text-sm">
+                  <p className="font-medium">Description</p>
+                  <p>
+                    Learn the skills required to build user interfaces and
+                    interactive web applications using HTML, CSS, and
+                    JavaScript.
+                  </p>
+                  <p className="font-medium">Prerequisites</p>
+                  <ul className="list-disc ml-4">
+                    <li>Basic understanding of HTML and CSS</li>
+                    <li>Experience with JavaScript programming</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <div className="flex flex-row items-center space-y-0">
+                  <DatabaseIcon className="h-6 w-6" />
+                  <CardTitle className="ml-2">Database Administrator</CardTitle>
+                </div>
+                <Switch />
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-2 text-sm">
+                  <p className="font-medium">Description</p>
+                  <p>
+                    Learn the skills required to design, implement, and maintain
+                    databases, including data modeling, normalization, and
+                    querying using SQL.
+                  </p>
+                  <p className="font-medium">Prerequisites</p>
+                  <ul className="list-disc ml-4">
+                    <li>Understanding of database concepts</li>
+                    <li>Experience with SQL</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
       </div>
     </div>
   );

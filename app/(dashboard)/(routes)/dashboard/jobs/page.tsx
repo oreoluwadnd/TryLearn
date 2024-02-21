@@ -1,154 +1,116 @@
 "use client";
-import React from "react";
-import * as z from "zod";
-import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
-import { toast } from "sonner";
-import { SparklesIcon } from "lucide-react";
-// import { handleCarrerSubmit } from "@/actions/getSkills";
-
-interface skillCardData {
-  name: string;
-  note: string;
-}
-
-// export const carrerformSchema = z.object({
-//   title: z.string().min(1, {
-//     message: "Title is required",
-//   }),
-// });
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Package2Icon, UsersIcon } from "lucide-react";
 
 export default function CreatePage() {
-  const [blog, setBlog] = React.useState<any>([]);
-  const router = useRouter();
-  // const form = useForm<z.infer<typeof carrerformSchema>>({
-  //   resolver: zodResolver(carrerformSchema),
-  //   defaultValues: {
-  //     title: "",
-  //   },
-  // });
-  console.log("🚀 ~ handleSubmit ~ values:");
-
-  // const { isSubmitting, isValid } = form.formState;
-
-  //ADD MUTATION THAT RECEIVES THE FORM DATA
-
-  // const mutation = useMutation({
-  //   mutationFn: handleCarrerSubmit,
-  //   onSuccess: (data, variables, context) => {
-  //     console.log("🚀 ~ onSuccess ~ data", data);
-  //     toast.success("Skills Ready! 🎉", {
-  //       icon: <SparklesIcon />,
-  //       description: "Your skills are ready to be used!",
-  //     });
-  //   },
-  //   onError: (error, variables, context) => {
-  //     console.log("🚀 ~ onError ~ error", error);
-  //     toast.error("Error", {
-  //       description: "There was an error creating your course.",
-  //     });
-  //   },
-  // });
-
-  //   const handleSubmit = async (values: z.infer<typeof carrerformSchema>) => {
-  //     // mutation.mutate(values);
-  //     // const data = await handleBlogSubmit(values);
-  // console.log("🚀 ~ handleSubmit ~ values", values);
-  //     // setBlog(data);
-  //   };
-  // console.log("🚀 ~ handleSubmit ~ mutation", mutation);
-
   return (
-    <div className="h-full overflow-hidden">
-      <div className=" overflow-y-scroll bg-[#FAFBFB] mx-auto flex-col gap-3 flex md:items-center md:justify-center h-full py-9">
-        <div className="gap-4 flex flex-col">
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          {/* <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="mt-4 space-y-4"
-          >
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Career Path</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g Software Engineer, Data Scientist, etc."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Identify the skills you need to advance your career.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center gap-x-2">
-              <Link href="/">
-                <Button type="button" variant="ghost">
-                  Cancel
-                </Button>
-              </Link>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
-                Continue
-              </Button>
-            </div>
-          </form>
-        </Form> */}
-
-          {/* {mutation.data &&
-          mutation.data.map((item: skillCardData, index: number) => (
-            <SkillsCard key={index} item={item} />
-          ))} */}
-        </div>
+    <div className=" overflow-hidden">
+      <div className=" overflow-y-scroll bg-[#FAFBFB] mx-auto flex-col gap-3 flex  h-full pb-24">
+        <main className="grid items-start gap-4 p-4 md:gap-8 md:p-6">
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">
+                  Job Insights
+                </CardTitle>
+                <Package2Icon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">+2350</div>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  +180.1% from last month
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">
+                  Open Positions Insights
+                </CardTitle>
+                <UsersIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">+573</div>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  +201 since last hour
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Card>
+              <div className="flex items-center p-4 h-10">
+                <h1 className="text-lg font-bold">Top Jobs</h1>
+              </div>
+              <div className="border-t" />
+              <div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <Card className="flex flex-col items-start p-0">
+                  <CardHeader className="pb-0">
+                    <CardTitle className="text-base font-bold">
+                      Senior Frontend Engineer
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      Acme Inc is looking for a passionate and experienced
+                      frontend engineer to join our team.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex items-end">
+                    <Button size="sm">View Details</Button>
+                  </CardContent>
+                </Card>
+                <Card className="flex flex-col items-start p-0">
+                  <CardHeader className="pb-0">
+                    <CardTitle className="text-base font-bold">
+                      Marketing Manager
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      We&apos;re seeking a creative and data-driven marketing
+                      manager to lead our marketing efforts.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex items-end">
+                    <Button size="sm">View Details</Button>
+                  </CardContent>
+                </Card>
+                <Card className="flex flex-col items-start p-0">
+                  <CardHeader className="pb-0">
+                    <CardTitle className="text-base font-bold">
+                      Product Designer
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      Join our team and help us create beautiful and intuitive
+                      user experiences.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex items-end">
+                    <Button size="sm">View Details</Button>
+                  </CardContent>
+                </Card>
+                <Card className="flex flex-col items-start p-0">
+                  <CardHeader className="pb-0">
+                    <CardTitle className="text-base font-bold">
+                      Data Scientist
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      We&apos;re looking for a talented data scientist to unlock
+                      insights from our data.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex items-end">
+                    <Button size="sm">View Details</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </Card>
+          </div>
+        </main>
       </div>
     </div>
   );
