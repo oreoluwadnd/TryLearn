@@ -35,9 +35,7 @@ export function CourseTab() {
                 <CardTitle>How To: Dynamic Routing in Next.js</CardTitle>
                 <CardDescription>
                   Learn how to implement dynamic routing in Next.js to create
-                  flexible and scalable web applications. Create dynamic routes,
-                  fetch data from an API, and explore advanced features like
-                  catch-all and optional catch-all segments.
+                  flexible and scalable applications.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2"></CardContent>
@@ -51,9 +49,7 @@ export function CourseTab() {
                 <CardDescription>
                   Creators of the popular app Wunderlist have launched a new
                   to-do app called Superlist. It offers a clean design,
-                  unlimited tasks, notes, and reminders, as well as a liberal
-                  pricing structure. Superlist can be used on multiple
-                  platforms, including Linux.
+                  unlimited task.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2"></CardContent>
@@ -68,10 +64,7 @@ export function CourseTab() {
                 </CardTitle>
                 <CardDescription>
                   Discover the transformative power of AI in maximizing
-                  workforce potential. Learn about AI&rsquo;s role in
-                  recruitment, employee training and development, performance
-                  management, and decision-making processes. Explore the
-                  benefits and challenges of AI adoption
+                  workforce potential.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2"></CardContent>
@@ -101,16 +94,9 @@ export function CourseTab() {
         <Card>
           <CardHeader>
             <CardTitle>Note</CardTitle>
-            <CardDescription className=" ">
-              Take lecture notes as you learn
-            </CardDescription>
+            <CardDescription>Take lecture notes as you learn</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <Editor />
-          </CardContent>
-          <CardFooter>
-            <Button>Save</Button>
-          </CardFooter>
+          <CardContent className="">{/* <Editor /> */}</CardContent>
         </Card>
       </TabsContent>
     </Tabs>

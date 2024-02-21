@@ -13,7 +13,7 @@ body,
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
   border-radius: 10px;
   color: #5D5D5D;
 }
@@ -35,20 +35,6 @@ body,
   background: #555;
 }
 
-/* .ql-container {
-  min-height: 10rem !important;
-  height: 100% !important;
-  flex: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.ql-editor {
-  height: 100% !important;
-  flex: 1 !important;
-  overflow-y: auto !important;
-  width: 100% !important;
-} */
 
 .ql-container {
   height: calc(100% - 42px) !important;
