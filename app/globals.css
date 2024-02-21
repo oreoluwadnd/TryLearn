@@ -13,14 +13,14 @@ body,
 
 /* width */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 10px;
+  border-radius: 10px;
+  color: #5D5D5D;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-
   display: none;
-
 }
 
 /* Handle */
@@ -32,7 +32,26 @@ body,
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #555;
+}
+
+/* .ql-container {
+  min-height: 10rem !important;
+  height: 100% !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.ql-editor {
+  height: 100% !important;
+  flex: 1 !important;
+  overflow-y: auto !important;
+  width: 100% !important;
+} */
+
+.ql-container {
+  height: calc(100% - 42px) !important;
 }
 
 @layer base {

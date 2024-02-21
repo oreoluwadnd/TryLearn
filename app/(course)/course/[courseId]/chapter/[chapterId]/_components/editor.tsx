@@ -9,6 +9,7 @@ export default function Editor() {
     <ReactQuill
       placeholder="Take note ......"
       theme="snow"
+      className="h-96 bg-white rounded-lg w-full"
       value={value}
       onChange={setValue}
     />

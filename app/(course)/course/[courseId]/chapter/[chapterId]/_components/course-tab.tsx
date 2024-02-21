@@ -14,7 +14,7 @@ import Editor from "./editor";
 
 export function CourseTab() {
   return (
-    <Tabs defaultValue="resources" className="w-full">
+    <Tabs defaultValue="resources" className="w-full overflow-x-hidden">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="resources">Resources</TabsTrigger>
         <TabsTrigger value="transcript">Transcript</TabsTrigger>
@@ -25,44 +25,73 @@ export function CourseTab() {
           <CardHeader>
             <CardTitle>Resources</CardTitle>
             <CardDescription>
-              Make changes to your account here. Click save when you&apos;re
-              done.
+              Download the resources for this chapter and the course you are in
+              now
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+          <CardContent className="gap-3 grid grid-cols-1 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <CardTitle>How To: Dynamic Routing in Next.js</CardTitle>
+                <CardDescription>
+                  Learn how to implement dynamic routing in Next.js to create
+                  flexible and scalable web applications. Create dynamic routes,
+                  fetch data from an API, and explore advanced features like
+                  catch-all and optional catch-all segments.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2"></CardContent>
+              <CardFooter>
+                <Button>Read Post</Button>
+              </CardFooter>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>ChatGPT Prompts for Business Writers</CardTitle>
+                <CardDescription>
+                  Creators of the popular app Wunderlist have launched a new
+                  to-do app called Superlist. It offers a clean design,
+                  unlimited tasks, notes, and reminders, as well as a liberal
+                  pricing structure. Superlist can be used on multiple
+                  platforms, including Linux.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2"></CardContent>
+              <CardFooter>
+                <Button>Read Post</Button>
+              </CardFooter>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  Maximizing Workforce Potential with the Power of AI
+                </CardTitle>
+                <CardDescription>
+                  Discover the transformative power of AI in maximizing
+                  workforce potential. Learn about AI&rsquo;s role in
+                  recruitment, employee training and development, performance
+                  management, and decision-making processes. Explore the
+                  benefits and challenges of AI adoption
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2"></CardContent>
+              <CardFooter>
+                <Button>Read Post</Button>
+              </CardFooter>
+            </Card>
           </CardContent>
-          <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter>
         </Card>
       </TabsContent>
       <TabsContent value="transcript">
         <Card>
           <CardHeader>
-            <CardTitle>Password</CardTitle>
+            <CardTitle>Transcript</CardTitle>
             <CardDescription>
-              Change your password here. After saving, you&apos;ll be logged
-              out.
+              Transcript of the video you are watching now and the progress of
+              it
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
-          </CardContent>
+          <CardContent className="space-y-2"></CardContent>
           {/* <CardFooter>
             <Button>Save password</Button>
           </CardFooter> */}
@@ -76,7 +105,7 @@ export function CourseTab() {
               Take lecture notes as you learn
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2 h-20 ">
+          <CardContent className="space-y-2">
             <Editor />
           </CardContent>
           <CardFooter>
