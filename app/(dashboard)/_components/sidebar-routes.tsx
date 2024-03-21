@@ -7,34 +7,16 @@ import Icons from "@/components/icons";
 const guestRoutes = [
   {
     name: "Home",
-    href: "/dashboard/home",
+    href: "/dashboard",
     icon: Icons.Home,
     color: "#689DFF",
   },
-  {
-    name: "Learning",
-    href: "/dashboard/learning",
-    color: "#A1DAB9",
-    icon: Icons.Book,
-  },
-  {
-    name: "Roadmap",
-    href: "/dashboard/roadmap",
-    color: "#FFC102",
-    icon: Icons.Map,
-  },
-  {
-    name: "Resume",
-    href: "/dashboard/resume",
-    color: "#3788D8",
-    icon: Icons.Pencil,
-  },
-  {
-    name: "Jobs",
-    href: "/dashboard/jobs",
-    color: "#00AA45",
-    icon: Icons.BriefCase,
-  },
+  // {
+  //   name: "Learning",
+  //   href: "/dashboard/learning",
+  //   color: "#A1DAB9",
+  //   icon: Icons.Book,
+  // },
 ];
 
 const teacherRoutes = [

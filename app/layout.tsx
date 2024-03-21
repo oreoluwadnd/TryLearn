@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -17,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <ClerkProvider>
     <html lang="en">
       <body className={inter.className}>
         <Provider>{children}</Provider>
       </body>
       <Toaster richColors />
     </html>
+    // </ClerkProvider>
   );
 }

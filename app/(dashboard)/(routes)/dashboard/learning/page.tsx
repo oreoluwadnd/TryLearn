@@ -85,7 +85,7 @@ export default function CreatePage() {
                     alt="Course thumbnail"
                     className="object-cover object-center"
                     height="120"
-                    src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/e3/b971b05cfe11e89d97d1bd932bfd30/algs4partI-logo.png"
+                    src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzQ4NTh8MHwxfHNlYXJjaHwxfHxSZWFjdHxlbnwwfDB8fHwxNzEwMTcxMTM2fDA&ixlib=rb-4.0.3&q=80&w=1080"
                     style={{
                       aspectRatio: "120/120",
                       objectFit: "cover",

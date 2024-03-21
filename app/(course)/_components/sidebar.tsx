@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 
-function Sidebar() {
+function ChaptersSidebar() {
   return (
     <div className="h-full w-full flex py-3 flex-col  shadow-sm bg-white ">
       <Link
@@ -29,4 +29,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default ChaptersSidebar;

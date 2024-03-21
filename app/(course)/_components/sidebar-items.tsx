@@ -1,4 +1,5 @@
 "use client ";
+import Icons from "@/components/icons";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -12,25 +13,19 @@ import { useEffect, useState } from "react";
 
 export function SideBarItem({
   name,
+  id,
   href,
-  icon: Icon,
-  color,
 }: {
   name: string;
+  id: string;
   href: string;
-  color: string;
-  icon: React.ComponentType<{ className: string }>;
 }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
-  // const pathname = usePathname();
+  const pathname = usePathname();
   const router = useRouter();
-  // const isActive =
-  //   (pathname === "/" && href === "/") ||
-  //   pathname === href ||
-  //   pathname?.startsWith(`${href}/`);
 
   const onClick = () => {
     router.push(href);
@@ -39,24 +34,36 @@ export function SideBarItem({
   if (!mounted) {
     return null;
   }
+  const url = pathname;
+  const chapterId = url.split("/").slice(-1)[0];
+  const isActive = id === chapterId;
 
   return (
     <>
       <button
         onClick={onClick}
         className={cn(
-          "flex items-center rounded-xl gap-x-2 text-black text-sm font-[500] pl-6 transition-all hover:bg-[#F8F4F2]"
+          "flex items-center rounded-xl gap-x-2 text-black text-sm font-[500] pl-6 transition-all hover:bg-sky-300"
         )}
       >
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className="flex items-center gap-2 py-4 w-full">
-              <Icon
-                className={cn(
-                  "text-black text-xl flex-shrink-0",
-                  true && "text-sky-700"
-                )}
-              />
+              {isActive ? (
+                <Icons.Pause
+                  className={cn(
+                    "text-black text-xl flex-shrink-0",
+                    isActive && "text-sky-700"
+                  )}
+                />
+              ) : (
+                <Icons.Play
+                  className={cn(
+                    "text-black text-xl flex-shrink-0",
+                    isActive && "text-sky-700"
+                  )}
+                />
+              )}
               <p className="text-ellipsis truncate whitespace-nowrap overflow-hidden">
                 {name}
               </p>

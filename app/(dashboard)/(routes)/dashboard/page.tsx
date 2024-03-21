@@ -1,163 +1,238 @@
 "use client";
-import React from "react";
+
 import * as z from "zod";
-import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { toast } from "sonner";
-import { SparklesIcon } from "lucide-react";
-// import { handleCarrerSubmit } from "@/actions/getSkills";
-import { SkillsCard } from "./_components/skills";
-import { get } from "http";
-// import { handleBlogSubmit } from "@/actions/getBlogs";
-import { BlogCard } from "./_components/blogs";
 
-interface skillCardData {
-  name: string;
-  note: string;
-}
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Icons from "@/components/icons";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useMutation } from "@tanstack/react-query";
+import { generateCoursesApi } from "@/actions/genearateCourse";
 
-// export const carrerformSchema = z.object({
-//   title: z.string().min(1, {
-//     message: "Title is required",
-//   }),
-// });
+import { useCoursesStore } from "@/store/course";
+import { useRouter } from "next/navigation";
+import Loader from "@/components/loader";
+
+export type courseForm = {
+  topic: string;
+  level: string;
+  tutor: string;
+};
+
+const formSchema = z.object({
+  topic: z.string().min(1, {
+    message: "Title is required",
+  }),
+  level: z.string().min(1, {
+    message: "Description is required",
+  }),
+  tutor: z.string().min(1, {
+    message: "Tutor is required",
+  }),
+});
 
 export default function CreatePage() {
-  const [blog, setBlog] = React.useState<any>([]);
   const router = useRouter();
-  // const form = useForm<z.infer<typeof carrerformSchema>>({
-  //   resolver: zodResolver(carrerformSchema),
-  //   defaultValues: {
-  //     title: "",
-  //   },
-  // });
-  console.log("🚀 ~ handleSubmit ~ values:");
+  const { actions } = useCoursesStore();
 
-  // const { isSubmitting, isValid } = form.formState;
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      topic: "",
+      level: "",
+      tutor: "",
+    },
+  });
+  const generateCoursesMutation = useMutation({
+    mutationFn: generateCoursesApi,
+    onSuccess: (data) => {
+      actions.addEntry({
+        chapters: data.chapters,
+        course: data.course,
+        description: data.description,
+        duration: data.duration,
+        image: data.image,
+      });
+      router.push(`/dashboard/${encodeURIComponent(data.course)}`);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
-  //ADD MUTATION THAT RECEIVES THE FORM DATA
-
-  // const mutation = useMutation({
-  //   mutationFn: handleCarrerSubmit,
-  //   onSuccess: (data, variables, context) => {
-  //     console.log("🚀 ~ onSuccess ~ data", data);
-  //     toast.success("Skills Ready! 🎉", {
-  //       icon: <SparklesIcon />,
-  //       description: "Your skills are ready to be used!",
-  //     });
-  //   },
-  //   onError: (error, variables, context) => {
-  //     console.log("🚀 ~ onError ~ error", error);
-  //     toast.error("Error", {
-  //       description: "There was an error creating your course.",
-  //     });
-  //   },
-  // });
-
-  //   const handleSubmit = async (values: z.infer<typeof carrerformSchema>) => {
-  //     // mutation.mutate(values);
-  //     // const data = await handleBlogSubmit(values);
-  // console.log("🚀 ~ handleSubmit ~ values", values);
-  //     // setBlog(data);
-  //   };
-  // console.log("🚀 ~ handleSubmit ~ mutation", mutation);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    generateCoursesMutation.mutate(values);
+    // actions.addEntry({
+    //   chapters: [],
+    //   course: "",
+    //   description: "",
+    //   duration: "",
+    //   image: "",
+    // });
+  }
 
   return (
     <div className="h-full overflow-hidden">
-      <div className=" overflow-y-scroll bg-[#FAFBFB] mx-auto flex-col gap-3 flex md:items-center md:justify-center h-full py-9">
-        <div className="gap-4 flex flex-col">
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <h1 className="text-9xlxl">SuperCharge your career</h1>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          <p>Advance your career with personalized learning paths.</p>
-          {/* <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="mt-4 space-y-4"
-          >
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Career Path</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g Software Engineer, Data Scientist, etc."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Identify the skills you need to advance your career.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center gap-x-2">
-              <Link href="/">
-                <Button type="button" variant="ghost">
-                  Cancel
-                </Button>
-              </Link>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
-                Continue
-              </Button>
+      <div className=" overflow-y-scroll bg-[#FAFBFB]  mx-auto flex-col gap-3 flex  h-full pb-6">
+        <main className="grid items-start gap-4 p-4 pb-20  md:gap-8 md:pb-20 md:p-6">
+          <div className="flex items-center gap-2">
+            <Link href="/dashboard/learning">
+              <Icons.BriefCase className="text-2xl" />
+            </Link>
+            <h1 className="font-semibold text-2xl text-nowrap">
+              AI Course Generation
+            </h1>
+          </div>
+          <div className="grid gap-4 bg-white p-4 rounded-lg">
+            <p className="text-gray-500 dark:text-gray-400">
+              Enter your preferences below to generate personalized AI courses
+            </p>
+            <div>
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6"
+                >
+                  <FormField
+                    control={form.control}
+                    name="topic"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Topic</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Data Analysis, Content Creation, etc."
+                            {...field}
+                          />
+                        </FormControl>
+
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="level"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Level</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a level" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Beginner">Beginner</SelectItem>
+                            <SelectItem value="Intermediate">
+                              Intermediate
+                            </SelectItem>
+                            <SelectItem value="Advanced">Advanced</SelectItem>
+                          </SelectContent>
+                        </Select>
+
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="tutor"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tutor</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a Tutor" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Emily">Emily</SelectItem>
+                            <SelectItem value="Raj">Raj</SelectItem>
+                            <SelectItem value="Maria">Maria</SelectItem>
+                            <SelectItem value="Liam">Liam</SelectItem>
+                            <SelectItem value="Haruto">Haruto</SelectItem>
+                            <SelectItem value="Pedro">Pedro</SelectItem>
+                          </SelectContent>
+                        </Select>
+
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="w-full md:col-span-2 justify-center">
+                    <Button className="w-full md:w-fit" type="submit">
+                      {generateCoursesMutation.isPending
+                        ? "Loading..."
+                        : "Generate"}
+                    </Button>
+                  </div>
+                </form>
+              </Form>
             </div>
-          </form>
-        </Form> */}
-
-          {/* {mutation.data &&
-          mutation.data.map((item: skillCardData, index: number) => (
-            <SkillsCard key={index} item={item} />
-          ))} */}
-
-          {blog &&
-            blog?.map((item: any, index: number) => (
-              <BlogCard key={index} item={item} />
-            ))}
-        </div>
+          </div>
+          {/* <div className="flex flex-col gap-4">
+            <Card>
+              <div className="flex items-center p-4 h-10">
+                <h1 className="text-lg font-bold">Top Generated Courses</h1>
+              </div>
+              <div className="border-t" />
+              <div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <Card className="flex flex-col items-start p-0">
+                  <CardHeader className="pb-0">
+                    <CardTitle className="text-base font-bold">
+                      React Js
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      Learn React from scratch with our AI generated course for
+                      beginners to advanced.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter className="flex-1 flex items-end">
+                    <Button size="sm">
+                      {generateCoursesMutation.isPending
+                        ? "Loading..."
+                        : "Generate"}
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </div>
+            </Card>
+          </div> */}
+        </main>
       </div>
     </div>
   );
