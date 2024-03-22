@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import Provider from "@/app/provider";
-
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function RootLayout({
   return (
     // <ClerkProvider>
     <html lang="en">
+      <GoogleAnalytics gaId="G-HM6L7B0P01" />
       <body className={inter.className}>
         <Provider>{children}</Provider>
       </body>
