@@ -18,6 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { enrollCourseApi } from "@/actions/enrollActions";
 import { toast } from "sonner";
+import Loader from "@/components/loader";
 
 export default function CourseDetails() {
   const router = useRouter();
@@ -52,70 +53,80 @@ export default function CourseDetails() {
   return (
     <div className="h-full overflow-hidden pb-11">
       <div className=" overflow-y-scroll bg-[#FAFBFB]  mx-auto flex-col gap-3 flex  h-full ">
-        <main className="grid items-start gap-4 p-4 md:gap-8 md:p-6">
-          <div className="flex items-center gap-2">
-            <Link href="/dashboard/">
-              <Icons.ChevronBack className="text-2xl" />
-            </Link>
-            <h1 className="font-semibold text-2xl text-nowrap">
-              Course Details
-            </h1>
-          </div>
-          <div className="grid gap-4 bg-white p-4 rounded-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <AspectRatio
-                ratio={2 / 1}
-                className="bg-muted"
-                suppressHydrationWarning={true}
-              >
-                <Image
-                  src={course.image}
-                  alt={`${course.course} course image`}
-                  fill
-                  className="rounded-md object-cover"
-                />
-              </AspectRatio>
-              <div className="space-y-2 h-full">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  {course.course}
+        {
+          //show loader when course is not loaded yet from the store/ localstorage or api call is in progress to get the course details from the server side or client side rendering
+          !course ? (
+            <div className="flex items-center justify-center h-full">
+              <Loader />
+            </div>
+          ) : (
+            <main className="grid items-start gap-4 p-4 md:gap-8 md:p-6">
+              <div className="flex items-center gap-2">
+                <Link href="/dashboard/">
+                  <Icons.ChevronBack className="text-2xl" />
+                </Link>
+                <h1 className="font-semibold text-2xl text-nowrap">
+                  Course Details
                 </h1>
-
-                <p>{course.description}</p>
-                <div className="gap-1 flex">
-                  <Badge color="primary">Beginner</Badge>
-                  <Badge color="primary">{course.duration}</Badge>
-                </div>
-                <div className="mt-auto pt-5">
-                  <Button
-                    className="whitespace-nowrap   justify-center flex w-full md:w-fit h-10 items-center rounded-lg border  border-gray-200 bg-gray-950 px-8  text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-950/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950"
-                    onClick={handleEnroll}
-                  >
-                    Enroll
-                  </Button>
-                </div>
               </div>
-            </div>
-            <Separator />
-            <div className="flex items-center mt-4 text-black">
-              <Icons.Database className="h-6 w-6 " />
-              <h1 className="ml-2 text-lg font-semibold">Course content</h1>
-            </div>
-            {course.chapters.map((chapter) => (
-              <Accordion
-                key={chapter.description}
-                type="single"
-                collapsible
-                className="w-full"
-                suppressHydrationWarning={true}
-              >
-                <AccordionItem value={chapter.chapter}>
-                  <AccordionTrigger>{chapter.chapter}</AccordionTrigger>
-                  <AccordionContent>{chapter.description}</AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ))}
-          </div>
-        </main>
+              <div className="grid gap-4 bg-white p-4 rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <AspectRatio
+                    ratio={2 / 1}
+                    className="bg-muted"
+                    suppressHydrationWarning={true}
+                  >
+                    <Image
+                      src={course.image}
+                      alt={`${course.course} course image`}
+                      fill
+                      className="rounded-md object-cover"
+                    />
+                  </AspectRatio>
+                  <div className="space-y-2 h-full">
+                    <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                      {course.course}
+                    </h1>
+
+                    <p>{course.description}</p>
+                    <div className="gap-1 flex">
+                      <Badge color="primary">{course.duration}</Badge>
+                    </div>
+                    <div className="mt-auto pt-5">
+                      <Button
+                        className="whitespace-nowrap   justify-center flex w-full md:w-fit h-10 items-center rounded-lg border  border-gray-200 bg-gray-950 px-8  text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-950/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950"
+                        onClick={handleEnroll}
+                      >
+                        {enrollCoursesMutation.isPending
+                          ? "Enrolling..."
+                          : "Enroll"}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex items-center mt-4 text-black">
+                  <Icons.Database className="h-6 w-6 " />
+                  <h1 className="ml-2 text-lg font-semibold">Course content</h1>
+                </div>
+                {course.chapters.map((chapter) => (
+                  <Accordion
+                    key={chapter.description}
+                    type="single"
+                    collapsible
+                    className="w-full"
+                    suppressHydrationWarning={true}
+                  >
+                    <AccordionItem value={chapter.chapter}>
+                      <AccordionTrigger>{chapter.chapter}</AccordionTrigger>
+                      <AccordionContent>{chapter.description}</AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                ))}
+              </div>
+            </main>
+          )
+        }
       </div>
     </div>
   );

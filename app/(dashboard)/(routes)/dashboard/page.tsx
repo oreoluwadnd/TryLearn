@@ -81,19 +81,12 @@ export default function CreatePage() {
       router.push(`/dashboard/${encodeURIComponent(data.course)}`);
     },
     onError: (error) => {
-      toast.error(error.message);
+      toast.error("Failed to generate course");
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     generateCoursesMutation.mutate(values);
-    // actions.addEntry({
-    //   chapters: [],
-    //   course: "",
-    //   description: "",
-    //   duration: "",
-    //   image: "",
-    // });
   }
 
   return (
@@ -196,7 +189,7 @@ export default function CreatePage() {
                   <div className="w-full md:col-span-2 justify-center">
                     <Button className="w-full md:w-fit" type="submit">
                       {generateCoursesMutation.isPending
-                        ? "Loading..."
+                        ? "Generating..."
                         : "Generate"}
                     </Button>
                   </div>
