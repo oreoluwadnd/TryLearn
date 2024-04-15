@@ -7,6 +7,7 @@ import Features from "./_components/landing-features";
 import Pricing from "./_components/landing-pricing";
 import Testimonial from "./_components/landing-testimonial";
 import Footer from "./_components/landing-footer";
+import Faqs from "./_components/landing-faq";
 
 function LandingPage() {
   return (
@@ -16,6 +17,7 @@ function LandingPage() {
       <Features />
       <Testimonial />
       <Pricing />
+      <Faqs />
       <Footer />
     </div>
   );

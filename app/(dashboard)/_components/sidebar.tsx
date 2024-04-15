@@ -9,13 +9,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Sidebar() {
   return (
     <div className="h-full w-full  py-3 flex flex-col overflow-y-auto shadow-sm bg-white ">
       <div className="flex items-center h-20  pl-7 text-black">
-        <Icons.Chart className="h-6 w-6 " />
-        <h1 className="ml-2 text-lg font-semibold">CareerHub</h1>
+        <span className="text-2xl">🔥</span>
+        <Link href={"/dashboard"} className="flex items-center">
+          <h1 className="text-2xl font-bold text-[#E63E21]">Try</h1>
+          <h1 className="text-2xl font-bold">Learn</h1>
+        </Link>
       </div>
       <div className="flex flex-col">
         <SidebarRoutes />

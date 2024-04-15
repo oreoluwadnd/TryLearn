@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
     "@hookform/resolvers": "^3.3.4",
+    "@langchain/langgraph": "^0.0.12",
     "@langchain/openai": "^0.0.14",
     "@next/third-parties": "^14.1.4",
     "@radix-ui/react-accordion": "^1.1.2",
@@ -32,6 +33,9 @@
     "@supabase/supabase-js": "^2.39.7",
     "@tanstack/react-query": "^5.18.1",
     "@tanstack/react-query-devtools": "^5.18.1",
+    "@tiptap/pm": "^2.3.0",
+    "@tiptap/react": "^2.3.0",
+    "@tiptap/starter-kit": "^2.3.0",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -46,7 +50,9 @@
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "react-icons": "^5.0.1",
+    "react-markdown": "^9.0.1",
     "react-player": "^2.14.1",
+    "remark-gfm": "^4.0.0",
     "sonner": "^1.4.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
@@ -54,6 +60,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

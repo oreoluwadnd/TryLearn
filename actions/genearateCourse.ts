@@ -6,6 +6,7 @@ export type CourseFromLlm = {
   description: string;
   image: string;
   duration: string;
+  tutor: string;
   chapters: {
     description: string;
     chapter: string;
@@ -15,7 +16,6 @@ export type CourseFromLlm = {
 
 export const generateCoursesApi = async (values: courseForm) => {
   console.log("🚀 ~ generateCoursesApi ~ values:", values);
-
   const res = await axios.post<CourseFromLlm>("/api/courses/create", values);
   return res.data;
 };

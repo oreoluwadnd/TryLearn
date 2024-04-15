@@ -21,8 +21,10 @@ export const CarrerSkillsSchema = StructuredOutputParser.fromZodSchema(
 const format_instructions = CarrerSkillsSchema.getFormatInstructions();
 
 const skillsPrompt = new PromptTemplate({
-  template:
-    "You are a career coach tasked with advising individuals on advancing their careers.Give me the most popular skills for the entry. use detailed insights and examples applicable to various professions and industries to give me an answer. Follow the formet to strucuture your output no matter what \n{format_instructions}\n{entry}",
+  template: `You are a career coach tasked with advising 
+  individuals on advancing their careers.Give me the most popular skills for the entry.
+  use detailed insights and examples applicable to various professions and industries to give me an answer.
+  Follow the formet to strucuture your output no matter what \n{format_instructions}\n{entry}`,
   inputVariables: ["entry"],
   partialVariables: { format_instructions },
   validateTemplate: true,
@@ -32,7 +34,6 @@ export const getSkillsPrompt = async (content: string) => {
   const input = await skillsPrompt.format({
     entry: content,
   });
-  console.log("🚀 ~ getSkillsPrompt ~ input:", input);
 
   return input;
 };

@@ -23,16 +23,20 @@ interface FeaturesProps {
 }
 
 export default function Footer() {
+  //function to year
+  const getYear = () => {};
   return (
     <footer className="bg-black text-white flex flex-col items-center justify-center py-3 space-y-8">
       <div className="py-20 flex flex-col justify-center items-center space-y-10">
         <h1 className="text-6xl font-bold text-center">
-          Shape your Future: Join TryLearn
+          Shape your Future: Try TryLearn
         </h1>
         <div className="flex space-x-4">
-          <Button className="bg-white flex space-x-2 text-black hover:bg-white hover:opacity-85">
-            <p>Get started for free</p> <EggFried className="w-6 h-6" />
-          </Button>
+          <Link href={"/dashboard"}>
+            <Button className="bg-white flex space-x-2 text-black hover:bg-white hover:opacity-85">
+              <p>Get started for free</p>
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="flex flex-col items-center space-y-2">

@@ -1,7 +1,7 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import VideoControl from "./video-control";
 import { SourceProps } from "react-player/base";
 
 type VideoPlayerProps = {
@@ -15,14 +15,15 @@ export default function VideoPlayer({ url }: VideoPlayerProps) {
   }, []);
 
   if (!mounted) {
-    return null;
+    <div className="animate-pulse aspect-video bg-gray-600" />;
   }
   return (
-    <AspectRatio ratio={16 / 9}>
+    <AspectRatio suppressHydrationWarning={true} ratio={16 / 9}>
       <ReactPlayer
         controls
         className="player"
         url={url}
+        alt="video"
         width="100%"
         height="100%"
       />

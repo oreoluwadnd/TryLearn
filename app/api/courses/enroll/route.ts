@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
-
-import { fetchImages } from "@/lib/unsplash/unsplash";
+import * as Sentry from "@sentry/node";
 import { enrollValues } from "@/actions/enrollActions";
+
 import { fetchVideo } from "@/lib/youtube";
 
 export async function POST(req: Request) {
+  Sentry.init({
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    tracesSampleRate: 1,
+    debug: false,
+  });
   try {
     const enrollData: enrollValues = await req.json();
     const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
@@ -19,7 +24,9 @@ export async function POST(req: Request) {
           return {
             ...chapter,
             id: index.toString(),
-            video,
+            videoId: video.id.videoId,
+            videoTitle: video.snippet.title,
+            videoDescription: video.snippet.description,
           };
         })
       );
@@ -29,12 +36,15 @@ export async function POST(req: Request) {
       };
     };
     const updatedResponse = await response(enrollData);
-    console.log("🚀 ~ response:", updatedResponse);
+
     return NextResponse.json(updatedResponse, {
-      status: 201,
+      status: 200,
     });
   } catch (error) {
-    console.log("🚀 ~ error:", error);
+    Sentry.captureException(error, {
+      extra: { file: "app/api/courses/enroll/route.ts" },
+    });
+    await Sentry.flush(2000);
     return new NextResponse("Something went wrong", {
       status: 500,
     });

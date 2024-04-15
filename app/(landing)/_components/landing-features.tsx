@@ -24,31 +24,34 @@ const features: FeaturesProps[] = [
       "Input skills and goals for personalized development recommendations..",
   },
   {
-    title: "AI Course Recommendations",
+    title: "AI-Powered Course Generation",
     logo: Bot,
     description:
-      "AI suggests tailored courses based on skill gaps and career goals.",
+      "Course generation is finely tuned to meet the specific needs of the learner",
   },
   {
-    title: "Career Roadmap",
+    title: "Effortless Video Integration",
     logo: Compass,
     description:
-      "Dynamic guide for advancing careers with milestones and strategies.",
+      "Enhance your learning experience with seamless integration of video content from YouTube and other platforms",
   },
   {
-    title: "Resume and Cover Letter Generator",
+    title: "Rich Course Content",
     logo: File,
-    description: "Tool highlights skills in resumes and cover letters.",
+    description:
+      "With access to a vast repository of high-quality videos spanning a wide range of topics",
   },
   {
-    title: "Skill Industry Insights",
+    title: "User-Friendly Interface",
     logo: BarChartIcon,
-    description: "Stay updated with insights on the latest  industry trends.",
+    description:
+      "Navigate our platform with ease thanks to our intuitive user interface",
   },
   {
-    title: "Job Board",
+    title: "Generate High-Quality Notes",
     logo: LucideBookmarkCheck,
-    description: "Explore job opportunities in AI and related tech fields",
+    description:
+      " Our platform utilizes advanced algorithms to generate comprehensive and high-quality notes summarizing each course module",
   },
 ];
 export default function Features() {

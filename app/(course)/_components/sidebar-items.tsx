@@ -64,7 +64,12 @@ export function SideBarItem({
                   )}
                 />
               )}
-              <p className="text-ellipsis truncate whitespace-nowrap overflow-hidden">
+              <p
+                className={cn(
+                  "text-ellipsis truncate whitespace-nowrap overflow-hidden",
+                  isActive && "text-sky-700"
+                )}
+              >
                 {name}
               </p>
             </TooltipTrigger>

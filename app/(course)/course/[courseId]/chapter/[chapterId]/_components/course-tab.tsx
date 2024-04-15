@@ -1,4 +1,7 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   Card,
   CardContent,
@@ -7,96 +10,115 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Stars } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { summaryAgent } from "@/actions/summaryAgent";
+import { toast } from "sonner";
+import { Chapter, useCoursesStore } from "@/store/course";
+import { Sumana } from "next/font/google";
 import Editor from "./editor";
 
-export function CourseTab() {
+export type summaryData = {
+  markdown: string;
+};
+
+export function CourseTab({ chapter }: { chapter?: Chapter }) {
+  const { actions, credit } = useCoursesStore((state) => state);
+
+  const summaryGeneration = useMutation({
+    mutationFn: summaryAgent,
+    onSuccess: (data) => {
+      actions.deductCredit();
+      if (chapter) {
+        toast.success("Summary generated successfully");
+        actions.addSummary({ ...chapter, summary: data });
+      }
+    },
+    onError: (error) => {
+      toast.error("Failed to generate summary");
+    },
+  });
+
+  const handleSummarize = async () => {
+    if (!chapter?.query) {
+      return;
+    }
+    if (credit === 0) {
+      toast.error("You have no credit to generate a summary");
+      return;
+    }
+
+    summaryGeneration.mutate(chapter?.query);
+  };
+
   return (
-    <Tabs defaultValue="resources" className="w-full overflow-x-hidden">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="resources">Resources</TabsTrigger>
-        <TabsTrigger value="transcript">Transcript</TabsTrigger>
+    <Tabs
+      suppressHydrationWarning={true}
+      defaultValue="resources"
+      className="w-full overflow-x-hidden"
+    >
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="resources">Summary</TabsTrigger>
+
         <TabsTrigger value="note">Note</TabsTrigger>
       </TabsList>
       <TabsContent value="resources">
         <Card>
           <CardHeader>
-            <CardTitle>Resources</CardTitle>
+            <CardTitle>
+              <div className="flex items-center my-3 justify-between">
+                <h2>Summary</h2>
+                <Button
+                  className="flex gap-2 items-center"
+                  disabled={
+                    summaryGeneration.isPending || Boolean(chapter?.summary)
+                  }
+                  onClick={() => handleSummarize()}
+                >
+                  <Stars />
+                  <p>Summarize</p>
+                </Button>
+              </div>
+            </CardTitle>
             <CardDescription>
-              Download the resources for this chapter and the course you are in
-              now
+              Dont have like watching a video? Click the button to generate a
+              note
             </CardDescription>
           </CardHeader>
           <CardContent className="gap-3 grid grid-cols-1 md:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <CardTitle>How To: Dynamic Routing in Next.js</CardTitle>
-                <CardDescription>
-                  Learn how to implement dynamic routing in Next.js to create
-                  flexible and scalable applications.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2"></CardContent>
-              <CardFooter>
-                <Button>Read Post</Button>
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>ChatGPT Prompts for Business Writers</CardTitle>
-                <CardDescription>
-                  Creators of the popular app Wunderlist have launched a new
-                  to-do app called Superlist. It offers a clean design,
-                  unlimited task.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2"></CardContent>
-              <CardFooter>
-                <Button>Read Post</Button>
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  Maximizing Workforce Potential with the Power of AI
-                </CardTitle>
-                <CardDescription>
-                  Discover the transformative power of AI in maximizing
-                  workforce potential.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2"></CardContent>
-              <CardFooter>
-                <Button>Read Post</Button>
-              </CardFooter>
-            </Card>
+            {chapter?.summary && (
+              <Markdown className="prose" remarkPlugins={[remarkGfm]}>
+                {chapter?.summary!}
+              </Markdown>
+            )}
+            {summaryGeneration.isPending && (
+              <div className="w-full flex justify-center h-52 items-center">
+                <Stars className="animate-spin  text-blue-600" size={100} />
+              </div>
+            )}
+            {!summaryGeneration.isPending && !chapter?.summary && (
+              <div className="w-full text-center flex justify-center h-52 items-center">
+                <p>
+                  No summary available. <br />
+                  Click the button to generate a summary
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </TabsContent>
-      <TabsContent value="transcript">
-        <Card>
-          <CardHeader>
-            <CardTitle>Transcript</CardTitle>
-            <CardDescription>
-              Transcript of the video you are watching now and the progress of
-              it
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2"></CardContent>
-          {/* <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter> */}
-        </Card>
-      </TabsContent>
+
       <TabsContent value="note">
         <Card>
           <CardHeader>
             <CardTitle>Note</CardTitle>
             <CardDescription>Take lecture notes as you learn</CardDescription>
           </CardHeader>
-          <CardContent className="">{/* <Editor /> */}</CardContent>
+          <CardContent className="h-96 w-full">
+            <Editor />
+          </CardContent>
         </Card>
       </TabsContent>
     </Tabs>

@@ -1,38 +1,34 @@
 "use client";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { usePathname } from "next/navigation";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { BadgeDollarSignIcon, LogOutIcon } from "lucide-react";
+import { useCoursesStore } from "@/store/course";
 import { UserButton } from "@clerk/nextjs";
 
 export const NavbarRoutes = () => {
   const pathname = usePathname();
-  const router = useRouter();
-  const isTeacherMode = pathname.startsWith("/teacher");
-  const isPlayerMode = pathname.startsWith("/player");
-  const isSearchPage = pathname === "/search";
+  const isCourse = pathname.includes("course");
+  const course = useCoursesStore((state) => state);
 
   return (
     <>
       <div className="flex  ml-auto gap-x-2">
         <div className="flex space-x-3">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="p-1 font-light rounded-lg text-lg space-x-0 flex items-center ">
-                <p className="text-red-400 text-2xl animate-pulse">🔥</p>
-                <span className="">25</span>
-              </TooltipTrigger>
-              <TooltipContent suppressHydrationWarning={true}>
-                <p className="text-xs text-gray-500">Good Job.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          {/* <UserButton /> */}
+          {isCourse && (
+            <Link href={`/dashboard/${encodeURIComponent(course.course)}`}>
+              <Button>
+                <LogOutIcon size={16} />
+                Exit
+              </Button>
+            </Link>
+          )}
+          <div className="flex items-center text-xl gap-1">
+            <BadgeDollarSignIcon className="text-yellow-700" />
+            {course.credit} / 2
+          </div>
+          {!isCourse && <UserButton afterSignOutUrl="/" />}
         </div>
       </div>
     </>

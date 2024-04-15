@@ -7,12 +7,8 @@ export async function fetchVideo(query: string, apiKey: string) {
 
   try {
     const response = await axios.get(url);
-    const videoId = response.data.items[0].id.videoId;
-    // const videoId = response.data.items;
-    // console.log("🚀 ~ file: youtube.ts:13 ~ fetchVideo ~ result:", result);
-    // const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    // console.log("Video URL:", result);
-    return videoId;
+    const videoData = response.data.items[0];
+    return videoData;
   } catch (error) {
     console.error("Error fetching video:", error);
     return error;

@@ -5,6 +5,7 @@ export type enrollValues = {
   description: string;
   image: string;
   duration: string;
+  tutor: string;
   chapters: {
     description: string;
     chapter: string;
@@ -16,6 +17,7 @@ interface Result {
   description: string;
   duration: string;
   chapters: Chapter[];
+  tutor: string;
   image: string;
 }
 

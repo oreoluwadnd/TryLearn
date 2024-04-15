@@ -11,6 +11,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 import { Bot, LucideIcon, SearchCheck, StarIcon } from "lucide-react";
+import Link from "next/link";
 
 interface TestimoniallProps {
   rating: number;
@@ -21,40 +22,32 @@ interface TestimoniallProps {
 
 const testimonial: TestimoniallProps[] = [
   {
-    name: "Masu'd",
+    name: "Taylor B",
     rating: 5,
-    image:
-      "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
-    description: `"The Career Growth Roadmap has been a godsend! It's
-                        simplified my career trajectory in AI, giving me a clear
-                        path forward. Highly recommended"`,
+    image: "https://i.pravatar.cc/150?img=44",
+    description: `"I've tried countless online learning platforms, but none compare to the personalized experience I found here.
+     The AI-generated courses and high-quality notes have revolutionized my learning journey. Highly recommend"`,
   },
   {
-    name: "James",
+    name: "Daniel H",
     rating: 5,
-    image:
-      "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
-    description: `"The Career Growth Roadmap has been a godsend! It's
-                        simplified my career trajectory in AI, giving me a clear
-                        path forward. Highly recommended"`,
+    image: "https://i.pravatar.cc/150?img=58",
+    description: `"As a busy professional, finding time for learning can be challenging. This platform has been a game-changer for me.
+     The ability to access tailored courses and relevant YouTube videos on-the-go has made learning convenient and enjoyable."`,
   },
   {
-    name: "Charles",
-    image:
-      "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
+    name: "Eric W",
+    image: "https://i.pravatar.cc/150?img=57",
     rating: 5,
-    description: `"The Career Growth Roadmap has been a godsend! It's
-                        simplified my career trajectory in AI, giving me a clear
-                        path forward. Highly recommended"`,
+    description: `"I've been using this platform to supplement my university studies, and I couldn't be happier with the results. The curated selection of high-quality content, combined with the interactive assessments, 
+    has  enhanced my understanding of complex subjects."`,
   },
   {
-    name: "Alex",
+    name: "Jessica F",
     rating: 5,
-    image:
-      "https://res.cloudinary.com/aore/image/upload/v1685310955/maukjciktevcscxkhxwg.png",
-    description: `"The Career Growth Roadmap has been a godsend! It's
-                        simplified my career trajectory in AI, giving me a clear
-                        path forward. Highly recommended"`,
+    image: "https://i.pravatar.cc/150?img=49",
+    description: `"After using this platform for just a few weeks,
+     I've already noticed a significant improvement in my understanding of various subjects. The personalized learning paths and AI-generated notes have made complex topics easy to grasp."`,
   },
 ];
 export default function Testimonial() {
@@ -63,9 +56,11 @@ export default function Testimonial() {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col justify-center space-y-8 text-center">
           <div className="space-y-2 w-full justify-center">
-            <Button className="w-full animate-pulse mb-3 max-w-80 bg-[#E63E21]  hover:opacity-80 hover:bg-[#ff5233] text-white">
-              GET STARTED FOR FREE
-            </Button>
+            <Link href={"/dashboard"}>
+              <Button className="w-full animate-pulse mb-3 max-w-80 bg-[#E63E21]  hover:opacity-80 hover:bg-[#ff5233] text-white">
+                GET STARTED FOR FREE
+              </Button>
+            </Link>
             <p className="max-w-[600px]  md:text-xl mx-auto">
               Unlock Your Potential: Hear What Users Are Saying at TryLearn
             </p>

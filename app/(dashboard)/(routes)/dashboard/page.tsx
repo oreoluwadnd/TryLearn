@@ -1,5 +1,4 @@
 "use client";
-
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { toast } from "sonner";
-
 import {
   Select,
   SelectContent,
@@ -24,6 +22,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Icons from "@/components/icons";
+
+import { useMutation } from "@tanstack/react-query";
+import { generateCoursesApi } from "@/actions/genearateCourse";
+
+import { useCoursesStore } from "@/store/course";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardDescription,
@@ -31,25 +35,41 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useMutation } from "@tanstack/react-query";
-import { generateCoursesApi } from "@/actions/genearateCourse";
-
-import { useCoursesStore } from "@/store/course";
-import { useRouter } from "next/navigation";
-import Loader from "@/components/loader";
 
 export type courseForm = {
   topic: string;
-  level: string;
   tutor: string;
 };
+const tutor = [
+  {
+    name: "Emily",
+    tone: "Friendly",
+  },
+  {
+    name: "Raj",
+    tone: "Professional",
+  },
+  {
+    name: "Maria",
+    tone: "Funny",
+  },
+  {
+    name: "Liam",
+    tone: "Strict",
+  },
+  {
+    name: "Haruto",
+    tone: "Funny",
+  },
+  {
+    name: "Pedro",
+    tone: "Playful",
+  },
+];
 
 const formSchema = z.object({
   topic: z.string().min(1, {
     message: "Title is required",
-  }),
-  level: z.string().min(1, {
-    message: "Description is required",
   }),
   tutor: z.string().min(1, {
     message: "Tutor is required",
@@ -58,26 +78,36 @@ const formSchema = z.object({
 
 export default function CreatePage() {
   const router = useRouter();
-  const { actions } = useCoursesStore();
+  const {
+    actions,
+    course,
+    description,
+    chapters,
+    credit,
+    tutor: TutorData,
+  } = useCoursesStore();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       topic: "",
-      level: "",
       tutor: "",
     },
   });
   const generateCoursesMutation = useMutation({
     mutationFn: generateCoursesApi,
     onSuccess: (data) => {
+      actions.deductCredit();
+      actions.resetStore();
       actions.addEntry({
         chapters: data.chapters,
         course: data.course,
         description: data.description,
         duration: data.duration,
         image: data.image,
+        tutor: data.tutor,
       });
+      toast.success("Course generated successfully");
       router.push(`/dashboard/${encodeURIComponent(data.course)}`);
     },
     onError: (error) => {
@@ -86,6 +116,11 @@ export default function CreatePage() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!credit) {
+      toast.error("You have exceeded your credit limit. Please upgrade.");
+      return;
+    }
+
     generateCoursesMutation.mutate(values);
   }
 
@@ -94,9 +129,8 @@ export default function CreatePage() {
       <div className=" overflow-y-scroll bg-[#FAFBFB]  mx-auto flex-col gap-3 flex  h-full pb-6">
         <main className="grid items-start gap-4 p-4 pb-20  md:gap-8 md:pb-20 md:p-6">
           <div className="flex items-center gap-2">
-            <Link href="/dashboard/learning">
-              <Icons.BriefCase className="text-2xl" />
-            </Link>
+            <Icons.BriefCase className="text-2xl" />
+
             <h1 className="font-semibold text-2xl text-nowrap">
               AI Course Generation
             </h1>
@@ -128,34 +162,6 @@ export default function CreatePage() {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="level"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Level</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a level" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="Beginner">Beginner</SelectItem>
-                            <SelectItem value="Intermediate">
-                              Intermediate
-                            </SelectItem>
-                            <SelectItem value="Advanced">Advanced</SelectItem>
-                          </SelectContent>
-                        </Select>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
 
                   <FormField
                     control={form.control}
@@ -173,12 +179,11 @@ export default function CreatePage() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="Emily">Emily</SelectItem>
-                            <SelectItem value="Raj">Raj</SelectItem>
-                            <SelectItem value="Maria">Maria</SelectItem>
-                            <SelectItem value="Liam">Liam</SelectItem>
-                            <SelectItem value="Haruto">Haruto</SelectItem>
-                            <SelectItem value="Pedro">Pedro</SelectItem>
+                            {tutor.map((tutor) => (
+                              <SelectItem key={tutor.name} value={tutor.name}>
+                                {tutor.name} - {tutor.tone}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
 
@@ -187,9 +192,13 @@ export default function CreatePage() {
                     )}
                   />
                   <div className="w-full md:col-span-2 justify-center">
-                    <Button className="w-full md:w-fit" type="submit">
+                    <Button
+                      disabled={generateCoursesMutation.isPending}
+                      className="w-full md:w-fit"
+                      type="submit"
+                    >
                       {generateCoursesMutation.isPending
-                        ? "Generating..."
+                        ? `${form.getValues("tutor")} is thinking...`
                         : "Generate"}
                     </Button>
                   </div>
@@ -197,34 +206,43 @@ export default function CreatePage() {
               </Form>
             </div>
           </div>
-          {/* <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <Card>
               <div className="flex items-center p-4 h-10">
-                <h1 className="text-lg font-bold">Top Generated Courses</h1>
+                <h1 className="text-lg font-bold">
+                  Recently Generated Courses
+                </h1>
               </div>
               <div className="border-t" />
               <div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                <Card className="flex flex-col items-start p-0">
-                  <CardHeader className="pb-0">
-                    <CardTitle className="text-base font-bold">
-                      React Js
-                    </CardTitle>
-                    <CardDescription className="text-sm">
-                      Learn React from scratch with our AI generated course for
-                      beginners to advanced.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter className="flex-1 flex items-end">
-                    <Button size="sm">
-                      {generateCoursesMutation.isPending
-                        ? "Loading..."
-                        : "Generate"}
-                    </Button>
-                  </CardFooter>
-                </Card>
+                {chapters.length > 0 && (
+                  <Card className="flex gap-4 flex-col items-start p-0">
+                    <CardHeader className="pb-0">
+                      <CardTitle className="text-base font-bold">
+                        {course}
+                      </CardTitle>
+                      <CardDescription className="text-sm">
+                        {description}
+                        {TutorData && ` - ${TutorData}`}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardFooter className="flex-1 flex items-end">
+                      <Button disabled={generateCoursesMutation.isPending}>
+                        <Link href={`/dashboard/${encodeURIComponent(course)}`}>
+                          View Course
+                        </Link>
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                )}
+                {!chapters.length && (
+                  <div className="text-gray-500 dark:text-gray-400 text-center">
+                    No courses generated yet
+                  </div>
+                )}
               </div>
             </Card>
-          </div> */}
+          </div>
         </main>
       </div>
     </div>

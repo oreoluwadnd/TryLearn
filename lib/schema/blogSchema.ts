@@ -39,7 +39,6 @@ export const getBlogPrompt = async (content: string) => {
   const input = await chapterBlogPrompt.format({
     entry: content,
   });
-  console.log("🚀 ~ getSkillsPrompt ~ input:", input);
 
   return input;
 };

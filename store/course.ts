@@ -1,33 +1,38 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { PersistStorage, devtools, persist } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 interface State {
   course: string;
   description: string;
   duration: string;
+  tutor: string;
+  credit: number;
+  user: string;
   chapters: Chapter[];
   image: string;
 }
 
-interface Chapter {
+export interface Chapter {
   chapter: string;
-  video?: string;
+  videoId?: string;
+  videoTitle?: string;
+  videoDescription?: string;
   id?: string;
-  blog?: Blog;
+  note?: string;
+  summary?: string;
+
   description: string;
   query: string;
-}
-interface Blog {
-  title: string;
-  content: string;
-  id: string;
 }
 
 type Actions = {
   actions: {
-    addEntry: (data: State) => void;
+    addEntry: (data: Omit<State, "credit">) => void;
+    addSummary: (data: Chapter) => void;
     resetStore: () => void;
+    deductCredit: () => void;
+    addCredit: (credit: number) => void;
   };
 };
 
@@ -38,16 +43,20 @@ export const useCoursesStore = create<State & Actions>()(
         course: "",
         description: "",
         duration: "",
-        chapters: [] as Chapter[], // Fix the type of chapters
+        tutor: "",
+        credit: 0,
+        chapters: [] as Chapter[],
         image: "",
+        user: "",
         actions: {
-          addEntry: (data: State) => {
+          addEntry: (data: Omit<State, "credit">) => {
             set((state) => {
               state.course = data.course;
               state.description = data.description;
               state.duration = data.duration;
               state.chapters = data.chapters;
               state.image = data.image;
+              state.tutor = data.tutor;
             });
           },
           resetStore: () => {
@@ -57,6 +66,31 @@ export const useCoursesStore = create<State & Actions>()(
               state.duration = "";
               state.chapters = [];
               state.image = "";
+              state.tutor = "";
+            });
+          },
+          addSummary: (data: Chapter) => {
+            set((state) => {
+              //check for the id them update the chapter summary
+              const chapterIndex = state.chapters.findIndex(
+                (chapter) => chapter.id === data.id
+              );
+              state.chapters[chapterIndex].summary = data.summary;
+            });
+          },
+          deductCredit: () => {
+            set((state) => {
+              state.credit -= 1;
+            });
+          },
+          addCredit: (credit: number) => {
+            set((state) => {
+              state.credit += credit;
+            });
+          },
+          addUser: (user: string) => {
+            set((state) => {
+              state.user = user;
             });
           },
         },
