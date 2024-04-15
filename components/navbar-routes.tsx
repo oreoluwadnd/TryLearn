@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { BadgeDollarSignIcon, LogOutIcon } from "lucide-react";
+import { BadgeDollarSignIcon, LogOutIcon, LucideGift } from "lucide-react";
 import { useCoursesStore } from "@/store/course";
 import { UserButton } from "@clerk/nextjs";
 
@@ -26,7 +26,7 @@ export const NavbarRoutes = () => {
           )}
           <div className="flex items-center text-xl gap-1">
             <BadgeDollarSignIcon className="text-yellow-700" />
-            {course.credit} / 2
+            {course.credit} / 3
           </div>
           {!isCourse && <UserButton afterSignOutUrl="/" />}
         </div>

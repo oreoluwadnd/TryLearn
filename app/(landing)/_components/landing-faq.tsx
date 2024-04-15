@@ -51,7 +51,7 @@ const features: FeaturesProps[] = [
 ];
 export default function Faqs() {
   return (
-    <section className="w-full py-10 md:py-24 lg:py-10 xl:py-10">
+    <div className="w-full py-10 md:py-24 lg:py-10 xl:py-10">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col justify-center space-y-8 text-center">
           <div className="w-full max-w-full border rounded-3xl p-2  md:p-10 space-y-4 mx-auto">
@@ -78,6 +78,6 @@ export default function Faqs() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

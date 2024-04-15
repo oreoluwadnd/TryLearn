@@ -31,7 +31,7 @@ const customers = [
 
 export default function LandingHero() {
   return (
-    <section className="w-full  py-4 md:py-10 lg:py-10 xl:py-10">
+    <div className="w-full  py-4 md:py-10 lg:py-10 xl:py-10">
       <div className="container px-4 md:px-6 flex justify-center">
         <div className=" max-w-4xl flex flex-col items-center space-y-8">
           <h1 className="text-5xl md:text-7xl font-bold text-center leading-tight">
@@ -83,6 +83,6 @@ export default function LandingHero() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

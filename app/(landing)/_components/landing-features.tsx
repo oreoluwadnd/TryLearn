@@ -56,7 +56,7 @@ const features: FeaturesProps[] = [
 ];
 export default function Features() {
   return (
-    <section className="w-full py-10 md:py-24 lg:py-10 xl:py-10">
+    <div className="w-full py-10 md:py-24 lg:py-10 xl:py-10">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 items-center">
           <div className="flex flex-col justify-center space-y-8 text-center">
@@ -88,6 +88,6 @@ export default function Features() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

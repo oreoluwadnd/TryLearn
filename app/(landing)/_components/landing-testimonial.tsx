@@ -52,7 +52,7 @@ const testimonial: TestimoniallProps[] = [
 ];
 export default function Testimonial() {
   return (
-    <section className="w-full py-10 md:py-24 lg:py-10 xl:py-10">
+    <div className="w-full py-10 md:py-24 lg:py-10 xl:py-10">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col justify-center space-y-8 text-center">
           <div className="space-y-2 w-full justify-center">
@@ -102,7 +102,7 @@ export default function Testimonial() {
           </Carousel>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

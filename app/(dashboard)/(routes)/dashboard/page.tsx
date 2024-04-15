@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Icons from "@/components/icons";
-
+import { useUser } from "@clerk/nextjs";
 import { useMutation } from "@tanstack/react-query";
 import { generateCoursesApi } from "@/actions/genearateCourse";
 
@@ -77,6 +77,7 @@ const formSchema = z.object({
 });
 
 export default function CreatePage() {
+  const { user: clerkUser } = useUser();
   const router = useRouter();
   const {
     actions,
@@ -84,6 +85,7 @@ export default function CreatePage() {
     description,
     chapters,
     credit,
+    user,
     tutor: TutorData,
   } = useCoursesStore();
 
@@ -116,6 +118,10 @@ export default function CreatePage() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!user) {
+      actions.addUser(clerkUser?.emailAddresses[0].emailAddress!);
+      actions.addCredit(3);
+    }
     if (!credit) {
       toast.error("You have exceeded your credit limit. Please upgrade.");
       return;

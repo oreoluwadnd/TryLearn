@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Pricing() {
   return (
-    <section className="w-full py-10 flex items-center justify-center">
+    <div className="w-full py-10 flex items-center justify-center">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
           <div className="flex flex-col p-6 border-[#E63E21] bg-white shadow-lg rounded-lg dark:bg-zinc-850 justify-between border">
@@ -103,6 +103,6 @@ export default function Pricing() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -28,11 +28,12 @@ export interface Chapter {
 
 type Actions = {
   actions: {
-    addEntry: (data: Omit<State, "credit">) => void;
+    addEntry: (data: Omit<State, "credit" | "user">) => void;
     addSummary: (data: Chapter) => void;
     resetStore: () => void;
     deductCredit: () => void;
     addCredit: (credit: number) => void;
+    addUser: (user: string) => void;
   };
 };
 
@@ -49,7 +50,7 @@ export const useCoursesStore = create<State & Actions>()(
         image: "",
         user: "",
         actions: {
-          addEntry: (data: Omit<State, "credit">) => {
+          addEntry: (data: Omit<State, "credit" | "user">) => {
             set((state) => {
               state.course = data.course;
               state.description = data.description;
